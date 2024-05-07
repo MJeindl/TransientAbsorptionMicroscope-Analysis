@@ -36,3 +36,9 @@ calculates the correction factor for one dimension which multiplies onto the abs
 ## rerunFromJSON
 runs files from summary JSON file again to allow a comparison between current fitting and past fitting. Allows overwriting of summary JSON.
 
+# Artray Camera interaction
+The software package (ArtrayLiveFitC#) is based on the SDK provided freely by Artray in C\#, specifically on the CS.NET\_Graphic example software.
+## Raw data output
+### A description of the format used to save the raw (binary) data
+Data is handled and saved as one dimensional byte arrays by the SDK and has to be processed into a workable format.  The camera specifications allow for a maximum bit depth of 12 bit. To be able to access this bit depth the video format of "Color 48bit *" has to be set, as the monochrome formats do not allow higher bit depth. The single pixel data for the "Color 48bit *" setting is encoded as 2 byte per colour channel per pixel. Since, even though this is a monochrome camera, the colour output was not the same colour values for all returned subpixel types, meaning RGB, the saturation of the camera was set to be minimal in software (-255). This leads to identical red, green and blue subpixel values. From these 3 colour values, the first entry is arbitrarily chosen for further processing.
+The data formatting is explained with the help of fig. \ref{fig:ByteArtrayOut}. Both bytes are formatted as big endian or most significant bit first. The second byte holds the most significant bit, with the first hex value and thus 4 bits being empty. The first byte holds the remaining 8 bits of the 12 bit value. (NOTE THIS WILL BE REPLACED WITH A SHORT PDF)
